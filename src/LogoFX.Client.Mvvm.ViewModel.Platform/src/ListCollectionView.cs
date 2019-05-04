@@ -315,6 +315,10 @@ namespace LogoFX.Client.Mvvm.ViewModel
                 return;
             }
 
+            // notify listeners
+            var e = new VectorChangedEventArgs(CollectionChange.ItemRemoved, index);
+            OnVectorChanged(e);
+
             // remove item from view
             _view.RemoveAt(index);
 
@@ -323,10 +327,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
             {
                 _index--;
             }
-
-            // notify listeners
-            var e = new VectorChangedEventArgs(CollectionChange.ItemRemoved, index);
-            OnVectorChanged(e);
         }
 
         // update view after changes other than add/remove an item
