@@ -1,4 +1,4 @@
-using System.Windows.Threading;
+using System.Threading;
 using LogoFX.Client.Testing.Infra;
 
 namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests

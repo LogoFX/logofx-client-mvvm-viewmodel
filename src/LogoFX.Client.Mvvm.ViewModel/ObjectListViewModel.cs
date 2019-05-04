@@ -14,7 +14,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Windows.Threading;
+using System.Threading;
 using LogoFX.Client.Mvvm.ViewModel.Contracts;
 using LogoFX.Core;
 
