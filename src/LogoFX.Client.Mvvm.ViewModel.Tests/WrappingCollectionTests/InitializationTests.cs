@@ -8,13 +8,15 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
     public class InitializationTests : WrappingCollectionTestsBase
     {
         [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public void AddingDataSource_DataSourceContainsModelsAndFactoryMethodIsSpecified_CollectionContainsConcreteTypeViewModelsWithDataSourceModels(bool isConcurrent)
+        [InlineData(false, false)]
+        [InlineData(false, true)]
+        [InlineData(true, false)]
+        [InlineData(true, true)]
+        public void AddingDataSource_DataSourceContainsModelsAndFactoryMethodIsSpecified_CollectionContainsConcreteTypeViewModelsWithDataSourceModels(bool isBulk, bool isConcurrent)
         {
             var dataSource = new[] {new TestModel(1), new TestModel(2), new TestModel(3)};
 
-            var wrappingCollection = new WrappingCollection(false, isConcurrent) {FactoryMethod = o => new TestViewModel((TestModel)o)};
+            var wrappingCollection = new WrappingCollection(isBulk, isConcurrent) {FactoryMethod = o => new TestViewModel((TestModel)o)};
             wrappingCollection.AddSource(dataSource);
 
             var viewModels = wrappingCollection.OfType<TestViewModel>().ToArray();
@@ -23,13 +25,15 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
         }
 
         [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public void AddingDataSource_DataSourceContainsModelsAndFactoryMethodIsNotSpecified_CollectionContainsViewModelsWithDataSourceModels(bool isConcurrent)
+        [InlineData(false, false)]
+        [InlineData(false, true)]
+        [InlineData(true, false)]
+        [InlineData(true, true)]
+        public void AddingDataSource_DataSourceContainsModelsAndFactoryMethodIsNotSpecified_CollectionContainsViewModelsWithDataSourceModels(bool isBulk, bool isConcurrent)
         {
             var dataSource = new[] { new TestModel(1), new TestModel(2), new TestModel(3) };
 
-            var wrappingCollection = new WrappingCollection(false, isConcurrent);
+            var wrappingCollection = new WrappingCollection(isBulk, isConcurrent);
             wrappingCollection.AddSource(dataSource);
 
             var viewModels = wrappingCollection.OfType<object>().ToArray();
@@ -40,13 +44,15 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
         }
 
         [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public void AddingDataSource_DataSourceContainsModelsAndSelectionModeIsOne_FirstViewModelIsSelected(bool isConcurrent)
+        [InlineData(false, false)]
+        [InlineData(false, true)]
+        [InlineData(true, false)]
+        [InlineData(true, true)]
+        public void AddingDataSource_DataSourceContainsModelsAndSelectionModeIsOne_FirstViewModelIsSelected(bool isBulk, bool isConcurrent)
         {
             var dataSource = new[] { new TestModel(1), new TestModel(2), new TestModel(3) };
 
-            var wrappingCollection = new WrappingCollection.WithSelection(SelectionMode.One, false, isConcurrent) { FactoryMethod = o => new TestViewModel((TestModel)o) };
+            var wrappingCollection = new WrappingCollection.WithSelection(SelectionMode.One, isBulk, isConcurrent) { FactoryMethod = o => new TestViewModel((TestModel)o) };
             wrappingCollection.AddSource(dataSource);
 
             var viewModels = wrappingCollection.OfType<TestViewModel>().ToArray();
@@ -56,13 +62,15 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
         }
 
         [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public void AddingDataSource_DataSourceContainsModelsAndSelectionModeIsZeroOrMore_NoViewModelIsSelected(bool isConcurrent)
+        [InlineData(false, false)]
+        [InlineData(false, true)]
+        [InlineData(true, false)]
+        [InlineData(true, true)]
+        public void AddingDataSource_DataSourceContainsModelsAndSelectionModeIsZeroOrMore_NoViewModelIsSelected(bool isBulk, bool isConcurrent)
         {
             var dataSource = new[] { new TestModel(1), new TestModel(2), new TestModel(3) };
 
-            var wrappingCollection = new WrappingCollection.WithSelection(SelectionMode.ZeroOrMore, false, isConcurrent) { FactoryMethod = o => new TestViewModel((TestModel)o) };
+            var wrappingCollection = new WrappingCollection.WithSelection(SelectionMode.ZeroOrMore, isBulk, isConcurrent) { FactoryMethod = o => new TestViewModel((TestModel)o) };
             wrappingCollection.AddSource(dataSource);
             
             var selectedViewModel = wrappingCollection.SelectedItem;

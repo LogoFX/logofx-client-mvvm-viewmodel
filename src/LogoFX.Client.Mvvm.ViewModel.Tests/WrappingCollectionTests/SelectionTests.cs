@@ -10,15 +10,17 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
     public class SelectionTests : WrappingCollectionTestsBase
     {
         [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public void Selection_ItemIsSelectedAndDeselected_SelectionIsEmpty(bool isConcurrent)
+        [InlineData(false, false)]
+        [InlineData(false, true)]
+        [InlineData(true, false)]
+        [InlineData(true, true)]
+        public void Selection_ItemIsSelectedAndDeselected_SelectionIsEmpty(bool isBulk, bool isConcurrent)
         {
             var originalDataSource =
                 new ObservableCollection<TestModel>(new[] {new TestModel(1), new TestModel(2), new TestModel(3)});
 
             var wrappingCollection =
-                new WrappingCollection.WithSelection(SelectionMode.ZeroOrMore, false, isConcurrent)
+                new WrappingCollection.WithSelection(SelectionMode.ZeroOrMore, isBulk, isConcurrent)
                     {FactoryMethod = o => new TestViewModel((TestModel) o)}.WithSource(
                     originalDataSource);
             var firstItem = wrappingCollection.OfType<TestViewModel>().First();
@@ -29,16 +31,18 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
         }
 
         [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [InlineData(false, false)]
+        [InlineData(false, true)]
+        [InlineData(true, false)]
+        [InlineData(true, true)]
         public void Selection_SelectionModeIsMultipleItemIsSelectedAndAnotherItemIsSelected_BothItemsAreSelected(
-            bool isConcurrent)
+            bool isBulk, bool isConcurrent)
         {
             var originalDataSource =
                 new ObservableCollection<TestModel>(new[] {new TestModel(1), new TestModel(2), new TestModel(3)});
 
             var wrappingCollection =
-                new WrappingCollection.WithSelection(SelectionMode.ZeroOrMore, false, isConcurrent)
+                new WrappingCollection.WithSelection(SelectionMode.ZeroOrMore, isBulk, isConcurrent)
                 {
                     FactoryMethod = o => new TestViewModel((TestModel) o)
                 }.WithSource(originalDataSource);
@@ -54,15 +58,17 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
         }
 
         [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [InlineData(false, false)]
+        [InlineData(false, true)]
+        [InlineData(true, false)]
+        [InlineData(true, true)]
         public void Selection_SelectionModeIsSingleItemIsSelectedAndAnotherItemIsSelected_OnlySecondItemIsSelected(
-            bool isConcurrent)
+            bool isBulk, bool isConcurrent)
         {
             var originalDataSource =
                 new ObservableCollection<TestModel>(new[] {new TestModel(1), new TestModel(2), new TestModel(3)});
 
-            var wrappingCollection = new WrappingCollection.WithSelection(SelectionMode.One, false, isConcurrent)
+            var wrappingCollection = new WrappingCollection.WithSelection(SelectionMode.One, isBulk, isConcurrent)
                 {FactoryMethod = o => new TestViewModel((TestModel) o)};
             wrappingCollection.AddSource(originalDataSource);
             var firstItem = wrappingCollection.OfType<TestViewModel>().First();
@@ -77,15 +83,17 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
         }
 
         [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public void Selection_ItemIsSelectedThenItemIsRemoved_SelectionIsEmpty(bool isConcurrent)
+        [InlineData(false, false)]
+        [InlineData(false, true)]
+        [InlineData(true, false)]
+        [InlineData(true, true)]
+        public void Selection_ItemIsSelectedThenItemIsRemoved_SelectionIsEmpty(bool isBulk, bool isConcurrent)
         {
             var originalDataSource =
                 new ObservableCollection<TestModel>(new[] {new TestModel(1), new TestModel(2), new TestModel(3)});
 
             var wrappingCollection =
-                new WrappingCollection.WithSelection(SelectionMode.ZeroOrMore, false, isConcurrent)
+                new WrappingCollection.WithSelection(SelectionMode.ZeroOrMore, isBulk, isConcurrent)
                 {
                     FactoryMethod = o => new TestViewModel((TestModel) o)
                 }.WithSource(originalDataSource);
@@ -97,15 +105,17 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
         }
 
         [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public void Selection_ItemIsSelectedThenAllItemsAreRemoved_SelectionIsEmpty(bool isConcurrent)
+        [InlineData(false, false)]
+        [InlineData(false, true)]
+        [InlineData(true, false)]
+        [InlineData(true, true)]
+        public void Selection_ItemIsSelectedThenAllItemsAreRemoved_SelectionIsEmpty(bool isBulk, bool isConcurrent)
         {
             var originalDataSource =
                 new RangeObservableCollection<TestModel>(new[] {new TestModel(1), new TestModel(2), new TestModel(3)});
 
             var wrappingCollection =
-                new WrappingCollection.WithSelection(SelectionMode.ZeroOrMore, false, isConcurrent)
+                new WrappingCollection.WithSelection(SelectionMode.ZeroOrMore, isBulk, isConcurrent)
                 {
                     FactoryMethod = o => new TestViewModel((TestModel) o)
                 }.WithSource(originalDataSource);
@@ -117,15 +127,17 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
         }
 
         [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public void ClearSelection_CollectionContainsTwoSelectedItems_SelectionIsEmpty(bool isConcurrent)
+        [InlineData(false, false)]
+        [InlineData(false, true)]
+        [InlineData(true, false)]
+        [InlineData(true, true)]
+        public void ClearSelection_CollectionContainsTwoSelectedItems_SelectionIsEmpty(bool isBulk, bool isConcurrent)
         {
             var originalDataSource =
                 new ObservableCollection<TestModel>(new[] {new TestModel(1), new TestModel(2), new TestModel(3)});
 
             var wrappingCollection =
-                new WrappingCollection.WithSelection(SelectionMode.ZeroOrMore, false, isConcurrent)
+                new WrappingCollection.WithSelection(SelectionMode.ZeroOrMore, isBulk, isConcurrent)
                 {
                     FactoryMethod = o => new TestViewModel((TestModel) o)
                 }.WithSource(originalDataSource);
@@ -139,15 +151,17 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
         }
 
         [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public void CollectionIsCreated_SelectionPredicateIsSetAndOriginalSourceContainsItemsThatMatchThePredicate_ItemsAreSelected(bool isConcurrent)
+        [InlineData(false, false)]
+        [InlineData(false, true)]
+        [InlineData(true, false)]
+        [InlineData(true, true)]
+        public void CollectionIsCreated_SelectionPredicateIsSetAndOriginalSourceContainsItemsThatMatchThePredicate_ItemsAreSelected(bool isBulk, bool isConcurrent)
         {
             var originalDataSource =
                 new ObservableCollection<TestModel>(new[] { new TestModel(1), new TestModel(2), new TestModel(3)});
 
             var wrappingCollection =
-                new WrappingCollection.WithSelection(wr => ((TestViewModel) wr).Model.Id >= 2, false, isConcurrent)
+                new WrappingCollection.WithSelection(wr => ((TestViewModel) wr).Model.Id >= 2, isBulk, isConcurrent)
                 {
                     FactoryMethod = o => new TestViewModel((TestModel) o)
                 }.WithSource(originalDataSource);
@@ -160,15 +174,17 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
         }
 
         [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public void Select_SelectionPredicateIsSet_ExceptionIsThrown(bool isConcurrent)
+        [InlineData(false, false)]
+        [InlineData(false, true)]
+        [InlineData(true, false)]
+        [InlineData(true, true)]
+        public void Select_SelectionPredicateIsSet_ExceptionIsThrown(bool isBulk, bool isConcurrent)
         {
             var originalDataSource =
                 new ObservableCollection<TestModel>(new[] {new TestModel(1), new TestModel(2), new TestModel(3)});
 
             var wrappingCollection =
-                new WrappingCollection.WithSelection(wr => ((TestViewModel) wr).Model.Id >= 2, false, isConcurrent)
+                new WrappingCollection.WithSelection(wr => ((TestViewModel) wr).Model.Id >= 2, isBulk, isConcurrent)
                 {
                     FactoryMethod = o => new TestViewModel((TestModel) o)
                 }.WithSource(originalDataSource);
@@ -179,15 +195,17 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
         }
 
         [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public void Unselect_SelectionPredicateIsSet_ExceptionIsThrown(bool isConcurrent)
+        [InlineData(false, false)]
+        [InlineData(false, true)]
+        [InlineData(true, false)]
+        [InlineData(true, true)]
+        public void Unselect_SelectionPredicateIsSet_ExceptionIsThrown(bool isBulk, bool isConcurrent)
         {
             var originalDataSource =
                 new ObservableCollection<TestModel>(new[] { new TestModel(1), new TestModel(2), new TestModel(3) });
 
             var wrappingCollection =
-                new WrappingCollection.WithSelection(wr => ((TestViewModel) wr).Model.Id >= 2, false, isConcurrent)
+                new WrappingCollection.WithSelection(wr => ((TestViewModel) wr).Model.Id >= 2, isBulk, isConcurrent)
                 {
                     FactoryMethod = o => new TestViewModel((TestModel) o)
                 }.WithSource(originalDataSource);
@@ -198,11 +216,13 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
         }
 
         [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [InlineData(false, false)]
+        [InlineData(false, true)]
+        [InlineData(true, false)]
+        [InlineData(true, true)]
         public void
             ModelPropertyIsChanged_SelectionPredicateIsSetAndItemDoesntMatchPredicateAfterModelChange_ItemIsUnselected(
-                bool isConcurrent)
+                bool isBulk, bool isConcurrent)
         {
             var originalDataSource =
                 new ObservableCollection<TestModel>(new[]
@@ -213,7 +233,7 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
                 });
 
             var wrappingCollection =
-                new WrappingCollection.WithSelection(wr => ((TestViewModel) wr).Model.Name.Length <= 5, false,
+                new WrappingCollection.WithSelection(wr => ((TestViewModel) wr).Model.Name.Length <= 5, isBulk,
                     isConcurrent)
                 {
                     FactoryMethod = o => new TestViewModel((TestModel) o)
@@ -229,11 +249,13 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
         }
 
         [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
+        [InlineData(false, false)]
+        [InlineData(false, true)]
+        [InlineData(true, false)]
+        [InlineData(true, true)]
         public void
             SelectionPredicateIsSet_SelectionPredicateWasSetInitiallyAndItemDoesnMatchTheNewPredicate_SelectionChanges(
-                bool isConcurrent)
+                bool isBulk, bool isConcurrent)
         {
             var originalDataSource =
                 new ObservableCollection<TestModel>(new[]
@@ -244,7 +266,7 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
                 });
 
             var wrappingCollection =
-                new WrappingCollection.WithSelection(wr => ((TestViewModel) wr).Model.Name.Length <= 5, false,
+                new WrappingCollection.WithSelection(wr => ((TestViewModel) wr).Model.Name.Length <= 5, isBulk,
                     isConcurrent)
                 {
                     FactoryMethod = o => new TestViewModel((TestModel) o)

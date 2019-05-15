@@ -8,15 +8,17 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
     public class DataSourceModificationsTests : WrappingCollectionTestsBase
     {
         [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public void ModelIsAddedThenModelIsRemovedThenModelIsAdded(bool isConcurrent)
+        [InlineData(false, false)]
+        [InlineData(false, true)]
+        [InlineData(true, false)]
+        [InlineData(true, true)]
+        public void ModelIsAddedThenModelIsRemovedThenModelIsAdded(bool isBulk, bool isConcurrent)
         {
             var firstModel = new TestModel(1);
             var dataSource =
                 new ObservableCollection<TestModel>(new[] { firstModel });
 
-            var wrappingCollection = new WrappingCollection(false, isConcurrent) { FactoryMethod = o => new TestViewModel((TestModel)o) };
+            var wrappingCollection = new WrappingCollection(isBulk, isConcurrent) { FactoryMethod = o => new TestViewModel((TestModel)o) };
             wrappingCollection.AddSource(dataSource);
             dataSource.Remove(firstModel);
             dataSource.Add(firstModel);
