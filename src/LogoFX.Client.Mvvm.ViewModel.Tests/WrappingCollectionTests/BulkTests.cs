@@ -8,15 +8,17 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
 {    
     public class BulkTests : WrappingCollectionTestsBase
     {
-        [Fact]
-        public void GivenCollectionIsBulkAndSourceWithTwoItemsIsAdded_WhenSecondItemIsRemoved_ThenCollectionContainsOneItem()
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public void GivenCollectionIsBulkAndSourceWithTwoItemsIsAdded_WhenSecondItemIsRemoved_ThenCollectionContainsOneItem(bool isConcurrent)
         {
             var source = new RangeModelsCollection<TestModel>();
             var modelOne = new TestModel(4);
             var modelTwo = new TestModel(5);            
 
             var wrappingCollection =
-                new WrappingCollection.WithSelection(SelectionMode.ZeroOrOne, isBulk: true)
+                new WrappingCollection.WithSelection(SelectionMode.ZeroOrOne, isBulk: true, isConcurrent)
                 {
                     FactoryMethod = o => o
                 }.WithSource(((IReadModelsCollection<TestModel>) source).Items);
@@ -27,15 +29,17 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
             wrappingCollection.OfType<TestModel>().ToArray().Should().BeEquivalentTo(expectedModels);            
         }
 
-        [Fact]
-        public void GivenCollectionIsBulkAndSourceWithTwoItemsIsAdded_WhenAllItemsAreRemoved_ThenCollectionContainsNoItem()
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public void GivenCollectionIsBulkAndSourceWithTwoItemsIsAdded_WhenAllItemsAreRemoved_ThenCollectionContainsNoItem(bool isConcurrent)
         {
             var source = new RangeModelsCollection<TestModel>();
             var modelOne = new TestModel(4);
             var modelTwo = new TestModel(5);            
 
             var wrappingCollection =
-                new WrappingCollection.WithSelection(SelectionMode.ZeroOrOne, isBulk: true)
+                new WrappingCollection.WithSelection(SelectionMode.ZeroOrOne, isBulk: true, isConcurrent)
                 {
                     FactoryMethod = o => o
                 }.WithSource(((IReadModelsCollection<TestModel>) source).Items);

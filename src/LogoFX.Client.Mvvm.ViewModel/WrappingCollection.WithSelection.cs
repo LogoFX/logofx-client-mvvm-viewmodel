@@ -44,8 +44,9 @@ namespace LogoFX.Client.Mvvm.ViewModel
             /// Initializes a new instance of the <see cref="WrappingCollection.WithSelection"/> class.
             /// </summary>
             /// <param name="selectionMode">The selection mode. Cannot be used together with selection predicate.</param>
-            /// <param name="isBulk">if set to <c>true</c> uses bulk operations mode.</param>
-            public WithSelection(SelectionMode selectionMode = DefaultSelectionMode, bool isBulk = false)
+            /// <param name="isBulk">Set to <c>true</c> to enable bulk operations mode.</param>
+            /// <param name="isConcurrent">Set to <c>true</c>for concurrent support.</param>
+            public WithSelection(SelectionMode selectionMode = DefaultSelectionMode, bool isBulk = false, bool isConcurrent = false)
                 : base(isBulk)
             {
                 _selectionMode = selectionMode;
@@ -56,13 +57,41 @@ namespace LogoFX.Client.Mvvm.ViewModel
             /// Initializes a new instance of the <see cref="WrappingCollection.WithSelection"/> class.
             /// </summary>
             /// <param name="selectionPredicate">The selection predicate. Cannot be used together with selection mode.</param>
-            /// <param name="isBulk">if set to <c>true</c> uses bulk operations mode.</param>
-            public WithSelection(Predicate<object> selectionPredicate = null, bool isBulk = false)
+            /// <param name="isBulk">Set to <c>true</c> to enable bulk operations mode.</param>
+            /// <param name="isConcurrent">Set to <c>true</c>for concurrent support.</param>
+            public WithSelection(Predicate<object> selectionPredicate = null, bool isBulk = false, bool isConcurrent = false)
                 : base(isBulk)
             {
                 _selectionPredicate = selectionPredicate;
                 _selectedItems.CollectionChanged += (a, b) => OnSelectionChanged();
             }
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="WrappingCollection.WithSelection"/> class.
+            /// </summary>
+            /// <param name="configSelectionSetupOptions">The selection setup options configuration.</param>
+            public WithSelection(Func<SelectionSetupOptions, SelectionSetupOptions> configSelectionSetupOptions)
+                : this(configSelectionSetupOptions(new SelectionSetupOptions()))
+            {
+            }
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="WrappingCollection.WithSelection"/> class.
+            /// </summary>
+            /// <param name="selectionSetupOptions">The selection setup options.</param>
+            public WithSelection(SelectionSetupOptions selectionSetupOptions)
+                :base(selectionSetupOptions)
+            {
+                if (_selectionPredicate != null)
+                {
+                    _selectionPredicate = selectionSetupOptions.SelectionPredicate;
+                }
+                else
+                {
+                    _selectionMode = selectionSetupOptions.SelectionMode;
+                }
+                _selectedItems.CollectionChanged += (a, b) => OnSelectionChanged();
+            }            
 
             #region Private implementation
             private bool HandleItemSelectionChanged(object obj, bool isSelecting)

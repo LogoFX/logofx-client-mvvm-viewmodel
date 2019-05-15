@@ -10,7 +10,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
 {
     public partial class WrappingCollection
     {
-        private readonly Dictionary<object, IndexedDictionary<object, object>> _dictionary = new Dictionary<object, IndexedDictionary<object, object>>();
+        private readonly Dictionary<object, IIndexedDictionary<object, object>> _dictionary = new Dictionary<object, IIndexedDictionary<object, object>>();
 
         private NotifyCollectionChangedEventHandler _weakHandler;
 
@@ -23,14 +23,14 @@ namespace LogoFX.Client.Mvvm.ViewModel
         private void PutWrapper(object list, object model, object wrapper)
         {
             if (!_dictionary.ContainsKey(list))
-                _dictionary.Add(list, new IndexedDictionary<object, object>());
+                _dictionary.Add(list, _indexedDictionaryFactory.Create<object, object>());
             _dictionary[list].Add(model,wrapper);
         }
 
         private void PutWrapperAt(object list, object o, object wrapper, int index)
         {
             if (!_dictionary.ContainsKey(list))
-                _dictionary.Add(list, new IndexedDictionary<object, object>());
+                _dictionary.Add(list, _indexedDictionaryFactory.Create<object, object>());
             _dictionary[list].AddAt(index,o,wrapper);            
         }
 
@@ -44,14 +44,14 @@ namespace LogoFX.Client.Mvvm.ViewModel
         private object GetWrapperAt(object list, int index)
         {
             if (!_dictionary.ContainsKey(list))            
-                _dictionary.Add(list, new IndexedDictionary<object, object>());            
+                _dictionary.Add(list, _indexedDictionaryFactory.Create<object, object>());            
             return _dictionary[list].Count>=index+1?_dictionary[list][index]:null;
         }
 
-        private Dictionary<object, object> GetListWrappers(object list)
+        private IIndexedDictionary<object, object> GetListWrappers(object list)
         {
             if (!_dictionary.ContainsKey(list))
-                return new Dictionary<object, object>();
+                return _indexedDictionaryFactory.Create<object, object>();            
             return _dictionary[list];
         }       
 
@@ -266,7 +266,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
                     });
                     break;
                 case NotifyCollectionChangedAction.Reset:
-                    Dictionary<object, object> listWrappers = GetListWrappers(sender);
+                    var listWrappers = GetListWrappers(sender);
 
                     Dispatch.Current.BeginOnUiThread(() =>
                     {

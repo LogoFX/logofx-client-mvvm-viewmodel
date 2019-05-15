@@ -15,7 +15,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// <param name="collection">The specified collection.</param>
         /// <param name="source">The source.</param>
         /// <returns></returns>
-        /// <exception cref="System.ArgumentNullException">
+        /// <exception cref="ArgumentNullException">
         /// collection
         /// or
         /// source
