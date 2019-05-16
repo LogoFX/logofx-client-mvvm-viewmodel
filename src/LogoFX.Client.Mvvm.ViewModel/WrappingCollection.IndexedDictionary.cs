@@ -352,7 +352,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
                 return base.ContainsKey(TransformKey(key));
             }
 
-            public new virtual void Add(TKey key, TValue item)
+            public virtual void Add(TKey key, TValue item)
             {
                 AddAt(-1, key, item);
             }
@@ -403,7 +403,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
                 Remove(TransformKey(key));
             }
 
-            public new void Remove(TKey key)
+            public void Remove(TKey key)
             {
                 bool bContains = ContainsKey(TransformKey(key));
                 if (m_bThrowErrorOnInvalidRemove && !bContains)
