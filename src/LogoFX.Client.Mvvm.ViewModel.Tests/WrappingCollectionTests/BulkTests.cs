@@ -18,7 +18,7 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
             var modelTwo = new TestModel(5);            
 
             var wrappingCollection =
-                new WrappingCollection.WithSelection(SelectionMode.ZeroOrOne, isBulk: true, isConcurrent)
+                new WrappingCollection.WithSelection(SelectionMode.ZeroOrOne, isBulk: true, isConcurrent: isConcurrent)
                 {
                     FactoryMethod = o => o
                 }.WithSource(((IReadModelsCollection<TestModel>) source).Items);
@@ -39,7 +39,7 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
             var modelTwo = new TestModel(5);            
 
             var wrappingCollection =
-                new WrappingCollection.WithSelection(SelectionMode.ZeroOrOne, isBulk: true, isConcurrent)
+                new WrappingCollection.WithSelection(SelectionMode.ZeroOrOne, isBulk: true, isConcurrent: isConcurrent)
                 {
                     FactoryMethod = o => o
                 }.WithSource(((IReadModelsCollection<TestModel>) source).Items);
