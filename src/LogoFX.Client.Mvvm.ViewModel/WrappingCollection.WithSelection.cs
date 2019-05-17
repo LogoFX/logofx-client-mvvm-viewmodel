@@ -179,7 +179,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
                 }
                 else if (args.PropertyName == nameof(ISelectable.IsSelected) && o is ISelectable selectable)
                 {
-                    Dispatch.Current.OnUiThread(() =>
+                    Dispatch.Current.BeginOnUiThread(() =>
                     {
                         if (_selectionPredicate != null)
                         {
