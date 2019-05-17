@@ -92,6 +92,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
 
             public void RemoveRange(IEnumerable<object> items)
             {
+                BeforeClear?.Invoke(this , new BeforeClearEventArgs(items));
                 items.ForEach(r => _items.Remove(r));
             }
 

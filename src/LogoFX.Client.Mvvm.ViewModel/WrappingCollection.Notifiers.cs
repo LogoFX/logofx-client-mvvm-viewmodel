@@ -10,9 +10,9 @@ namespace LogoFX.Client.Mvvm.ViewModel
 {
     public partial class WrappingCollection
     {
-        readonly Dictionary<object, IndexedDictionary<object, object>> _dictionary = new Dictionary<object, IndexedDictionary<object, object>>();
+        private readonly Dictionary<object, IIndexedDictionary<object, object>> _dictionary = new Dictionary<object, IIndexedDictionary<object, object>>();
 
-        private NotifyCollectionChangedEventHandler _weakHandler = null;
+        private NotifyCollectionChangedEventHandler _weakHandler;
 
         private object GetWrapper(object list, object model)
         {
@@ -23,14 +23,14 @@ namespace LogoFX.Client.Mvvm.ViewModel
         private void PutWrapper(object list, object model, object wrapper)
         {
             if (!_dictionary.ContainsKey(list))
-                _dictionary.Add(list, new IndexedDictionary<object, object>());
+                _dictionary.Add(list, _indexedDictionaryFactory.Create<object, object>());
             _dictionary[list].Add(model,wrapper);
         }
 
         private void PutWrapperAt(object list, object o, object wrapper, int index)
         {
             if (!_dictionary.ContainsKey(list))
-                _dictionary.Add(list, new IndexedDictionary<object, object>());
+                _dictionary.Add(list, _indexedDictionaryFactory.Create<object, object>());
             _dictionary[list].AddAt(index,o,wrapper);            
         }
 
@@ -43,30 +43,19 @@ namespace LogoFX.Client.Mvvm.ViewModel
 
         private object GetWrapperAt(object list, int index)
         {
-
             if (!_dictionary.ContainsKey(list))            
-                _dictionary.Add(list, new IndexedDictionary<object, object>());            
+                _dictionary.Add(list, _indexedDictionaryFactory.Create<object, object>());            
             return _dictionary[list].Count>=index+1?_dictionary[list][index]:null;
         }
 
-        private Dictionary<object, object> GetListWrappers(object list)
+        private IIndexedDictionary<object, object> GetListWrappers(object list)
         {
             if (!_dictionary.ContainsKey(list))
-                return new Dictionary<object, object>();
+                return _indexedDictionaryFactory.Create<object, object>();            
             return _dictionary[list];
-        }
+        }       
 
-        private void InvokeOnUiThread(Action a)
-        {
-#if WinRT
-            Dispatch.Current.OnUiThread(
-#else
-            Dispatch.Current.BeginOnUiThread(
-#endif
-a);
-        }
-
-        private void AddList(IEnumerable i)
+        private void AddList(IEnumerable enumerable)
         {
             //make sure we catch collection changes
             IList<object> l;
@@ -74,7 +63,7 @@ a);
             {
                 try
                 {
-                    l = i.Cast<object>().ToList();
+                    l = enumerable.Cast<object>().ToList();
                 }
                 catch
                 {
@@ -83,19 +72,19 @@ a);
                 break;
             } while (true);
 
-            l.ForEach(item => ListCollectionChanged(i, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, -1)));
+            l.ForEach(item => ListCollectionChanged(enumerable, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, -1)));
 
-            if (i is INotifyCollectionChanged)
+            if (enumerable is INotifyCollectionChanged notifyCollectionChanged)
             {
                 if (_weakHandler == null)
                 {
                     _weakHandler = WeakDelegate.From(ListCollectionChanged);
                 }
 
-                ((INotifyCollectionChanged)i).CollectionChanged += _weakHandler;
+                notifyCollectionChanged.CollectionChanged += _weakHandler;
             }
         }
-        private void RemoveList(IEnumerable i)
+        private void RemoveList(IEnumerable enumerable)
         {
             //make sure we catch collection changes
             IList<object> l;
@@ -103,7 +92,7 @@ a);
             {
                 try
                 {
-                    l = i.Cast<object>().ToList();
+                    l = enumerable.Cast<object>().ToList();
                 }
                 catch
                 {
@@ -112,10 +101,10 @@ a);
                 break;
             } while (true);
 
-            if (i is INotifyCollectionChanged && _weakHandler != null)
-                ((INotifyCollectionChanged)i).CollectionChanged -= _weakHandler;
+            if (enumerable is INotifyCollectionChanged notifyCollectionChanged && _weakHandler != null)
+                notifyCollectionChanged.CollectionChanged -= _weakHandler;
 
-            l.ForEach(item => ListCollectionChanged(i, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item, -1)));
+            l.ForEach(item => ListCollectionChanged(enumerable, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item, -1)));
         }
         private void SourcesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -150,26 +139,26 @@ a);
         {
             Action<object> RemoveHandler = (a) =>
             {
-                object o = GetWrapper(sender, a);
+                var wrapper = GetWrapper(sender, a);
                 RemoveWrapper(sender, a);
-                _collectionManager.Remove(o);
-                if (o is IDisposable)
-                    ((IDisposable)o).Dispose();
+                _collectionManager.Remove(wrapper);
+                if (wrapper is IDisposable disposable)
+                    disposable.Dispose();
             };
             Action<IEnumerable<object>> RemoveRangeHandler = collection =>
             {
                 var wrappers = collection.Select(r => new Tuple<object, object>(GetWrapper(sender, r), r)).ToArray();
                 wrappers.ForEach(a => RemoveWrapper(sender, a.Item2));
                 _collectionManager.RemoveRange(wrappers.Select(t => t.Item1));
-                wrappers.ForEach(o =>
+                wrappers.ForEach(wrapper =>
                 {
-                    if (o is IDisposable)
-                        ((IDisposable) o).Dispose();
+                    if (wrapper is IDisposable disposable)
+                        disposable.Dispose();
                 });
             };
             Action<object> AddHandler = (a) =>
             {
-                object wrapper = CreateWrapper(a);
+                var wrapper = CreateWrapper(a);
                 PutWrapper(sender, a, wrapper);
                 _collectionManager.Add(wrapper);
             };
@@ -202,7 +191,7 @@ a);
                 wrappers.ForEach(r =>
                 {
                     var oldWrapper = GetWrapperAt(sender, r.Item3);
-                    int oldIndex = _collectionManager.IndexOf(oldWrapper);
+                    var oldIndex = _collectionManager.IndexOf(oldWrapper);
                     PutWrapperAt(sender, r.Item1, r.Item2, r.Item3);
                     if (oldWrapper != null && oldIndex >= 0)
                     {
@@ -224,51 +213,51 @@ a);
                 case NotifyCollectionChangedAction.Add:                    
                     if (e.NewStartingIndex == -1)
                     {
-                        InvokeOnUiThread(() => AddRangeHandler(e.NewItems.Cast<object>()));                        
+                        Dispatch.Current.BeginOnUiThread(() => AddRangeHandler(e.NewItems.Cast<object>()));                        
                     }
                     else
                     {
-                        InvokeOnUiThread(() =>
+                        Dispatch.Current.BeginOnUiThread(() =>
                         {
-                            int newindex = e.NewStartingIndex;
-                            InsertRangeHandler(e.NewItems.Cast<object>(), newindex);
+                            var newStartingIndex = e.NewStartingIndex;
+                            InsertRangeHandler(e.NewItems.Cast<object>(), newStartingIndex);
                         });
                     }
                     break;
                 case NotifyCollectionChangedAction.Remove:
-                    InvokeOnUiThread(() => RemoveRangeHandler(e.OldItems.Cast<object>()));
+                    Dispatch.Current.BeginOnUiThread(() => RemoveRangeHandler(e.OldItems.Cast<object>()));
                     break;
                 case NotifyCollectionChangedAction.Move:
-                    InvokeOnUiThread(() =>
+                    Dispatch.Current.BeginOnUiThread(() =>
                     {
                         RemoveRangeHandler(e.OldItems.Cast<object>());
 
                         if (e.NewStartingIndex == -1)
                         {
-                            InvokeOnUiThread(() => AddRangeHandler(e.NewItems.Cast<object>()));
+                            Dispatch.Current.BeginOnUiThread(() => AddRangeHandler(e.NewItems.Cast<object>()));                            
                         }
                         else
                         {
-                            InvokeOnUiThread(() =>
+                            Dispatch.Current.BeginOnUiThread(() =>
                             {
-                                int newindex = e.NewStartingIndex;
-                                InsertRangeHandler(e.NewItems.Cast<object>(), newindex);
+                                var newStartingIndex = e.NewStartingIndex;
+                                InsertRangeHandler(e.NewItems.Cast<object>(), newStartingIndex);
                             });
                         }
                     });
                     break;
                 case NotifyCollectionChangedAction.Replace:
-                    InvokeOnUiThread(() =>
+                    Dispatch.Current.BeginOnUiThread(() =>
                     {
                         RemoveRangeHandler(e.OldItems.Cast<object>());
 
                         if (e.NewStartingIndex == -1)
                         {
-                            InvokeOnUiThread(() => AddRangeHandler(e.NewItems.Cast<object>()));
+                            Dispatch.Current.BeginOnUiThread(() => AddRangeHandler(e.NewItems.Cast<object>()));
                         }
                         else
                         {
-                            InvokeOnUiThread(() =>
+                            Dispatch.Current.BeginOnUiThread(() =>
                             {
                                 int newindex = e.NewStartingIndex;
                                 InsertRangeHandler(e.NewItems.Cast<object>(), newindex);
@@ -277,14 +266,14 @@ a);
                     });
                     break;
                 case NotifyCollectionChangedAction.Reset:
-                    Dictionary<object, object> listwrappers = GetListWrappers(sender);
+                    var listWrappers = GetListWrappers(sender);
 
-                    InvokeOnUiThread(() =>
+                    Dispatch.Current.BeginOnUiThread(() =>
                     {
-                        if (listwrappers.Count > 0)
+                        if (listWrappers.Count > 0)
                         {
-                            RemoveRangeHandler(listwrappers.Select(a => a.Key).ToList());
-                            listwrappers.Clear();                                                    
+                            RemoveRangeHandler(listWrappers.Select(a => a.Key).ToList());
+                            listWrappers.Clear();                                                    
                         }                        
                     });
                     break;

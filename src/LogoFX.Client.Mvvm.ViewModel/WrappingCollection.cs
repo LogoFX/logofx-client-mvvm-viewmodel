@@ -17,6 +17,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
     {
         private readonly ObservableCollection<IEnumerable> _sources = new ObservableCollection<IEnumerable>();
         private readonly ICollectionManager _collectionManager;
+        private readonly IIndexedDictionaryFactory _indexedDictionaryFactory;
         private Func<object, object> _factoryMethod;
         private readonly Func<object,object> _defaultFactoryMethod =
             a => new { Model = a }
@@ -26,7 +27,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// Initializes a new instance of the <see cref="WrappingCollection"/> class.
         /// </summary>
         public WrappingCollection()
-            :this(isBulk:false)
+            :this(isBulk: false, isConcurrent:false)
         {
             
         }
@@ -34,8 +35,27 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// <summary>
         /// Initializes a new instance of the <see cref="WrappingCollection"/> class.
         /// </summary>
+        public WrappingCollection(SetupOptions setupOptions)
+            :this(setupOptions.IsBulk, setupOptions.IsConcurrent)
+        {
+                
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WrappingCollection"/> class.
+        /// </summary>
+        /// <param name="configSetupOptions">The setup options configuration.</param>
+        public WrappingCollection(Func<SetupOptions, SetupOptions> configSetupOptions)
+            :this(configSetupOptions(new SetupOptions()).IsBulk, configSetupOptions(new SetupOptions()).IsConcurrent)
+        {            
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WrappingCollection"/> class.
+        /// </summary>
         /// <param name="isBulk">if set to <c>true</c> [is bulk].</param>
-        public WrappingCollection(bool isBulk = false)
+        /// <param name="isConcurrent">Set to <c>true</c>for concurrent support.</param>
+        public WrappingCollection(bool isBulk = false, bool isConcurrent = false)
         {
             _collectionManager = isBulk
                 ? CollectionManagerFactory.CreateRangeManager()
@@ -45,6 +65,10 @@ namespace LogoFX.Client.Mvvm.ViewModel
             _collectionManager.BeforeClear += OnBeforeClearCore;
             
             _sources.CollectionChanged += SourcesCollectionChanged;
+
+            _indexedDictionaryFactory = isConcurrent
+                ? (IIndexedDictionaryFactory) new ConcurrentIndexedDictionaryFactory()
+                : new RegularIndexedDictionaryFactory();
         }
 
         private IModelWrapper _loadingViewModel;

@@ -15,7 +15,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// <param name="collection">The specified collection.</param>
         /// <param name="source">The source.</param>
         /// <returns></returns>
-        /// <exception cref="System.ArgumentNullException">
+        /// <exception cref="ArgumentNullException">
         /// collection
         /// or
         /// source
@@ -23,10 +23,10 @@ namespace LogoFX.Client.Mvvm.ViewModel
         public static T WithSource<T>(this T collection, IEnumerable source) where T : WrappingCollection
         {
             if (collection == null)
-                throw new ArgumentNullException("collection");
+                throw new ArgumentNullException(nameof(collection));
 
             if (source == null)
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
 
             collection.AddSource(source);
 

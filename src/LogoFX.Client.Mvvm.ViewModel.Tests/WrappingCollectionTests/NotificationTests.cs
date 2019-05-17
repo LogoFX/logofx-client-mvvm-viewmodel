@@ -7,16 +7,18 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
 {    
     public class NotificationTests : WrappingCollectionTestsBase
     {
-        [Fact]
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
         public void
             WhenCollectionIsCreatedWithRangeAndSourceIsUpdatedWithAddRange_ThenSingleNotificationIsRaisedWithAllWrappers
-            ()
+            (bool isConcurrent)
         {
             var source = new RangeObservableCollection<object>();
             var items = new[] { new object(), new object() };
             var numberOfTimes = 0;
 
-            var collection = new WrappingCollection(isBulk: true)
+            var collection = new WrappingCollection(true, isConcurrent)
             {
                 FactoryMethod = o => o
             };
@@ -30,16 +32,18 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
             source.AddRange(items);
         }
 
-        [Fact]
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
         public void
             WhenCollectionIsCreatedWithRangeAndSingleItemAndSourceIsUpdatedWithRemoveRange_ThenSingleNotificationIsRaisedWithAllWrappers
-            ()
+            (bool isConcurrent)
         {
             var source = new RangeObservableCollection<object>();
             var items = new[] { new object() };
             var numberOfTimes = 0;
 
-            var collection = new WrappingCollection(isBulk: true)
+            var collection = new WrappingCollection(true, isConcurrent)
             {
                 FactoryMethod = o => o
             };
@@ -54,16 +58,18 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
             source.RemoveRange(items);
         }
 
-        [Fact]
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
         public void
             WhenCollectionIsCreatedWithRangeAndMultipleItemsAndSourceIsUpdatedWithRemoveRange_ThenSingleNotificationIsRaisedWithAllWrappersAndActionIsReset
-            ()
+            (bool isConcurrent)
         {
             var source = new RangeObservableCollection<object>();
             var items = new[] { new object(), new object(), new object() };
             var numberOfTimes = 0;
 
-            var collection = new WrappingCollection(isBulk: true)
+            var collection = new WrappingCollection(true, isConcurrent)
             {
                 FactoryMethod = o => o
             };
@@ -78,16 +84,18 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
             source.RemoveRange(items);
         }
 
-        [Fact]
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
         public void
             WhenCollectionIsCreatedWithRangeAndSingleItemAndSourceIsCleared_ThenSingleNotificationIsRaisedWithAllWrappers
-            ()
+            (bool isConcurrent)
         {
             var source = new RangeObservableCollection<object>();
             var items = new[] { new object() };
             var numberOfTimes = 0;
 
-            var collection = new WrappingCollection(isBulk: true)
+            var collection = new WrappingCollection(true, isConcurrent)
             {
                 FactoryMethod = o => o
             };
@@ -102,16 +110,18 @@ namespace LogoFX.Client.Mvvm.ViewModel.Tests.WrappingCollectionTests
             source.Clear();
         }
 
-        [Fact]
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
         public void
             WhenCollectionIsCreatedWithRangeAndMultipleItemsAndSourceIsCleared_ThenSingleNotificationIsRaisedWithAllWrappersAndActionisReset
-            ()
+            (bool isConcurrent)
         {
             var source = new RangeObservableCollection<object>();
             var items = new[] { new object(), new object(), new object() };
             var numberOfTimes = 0;
 
-            var collection = new WrappingCollection(isBulk: true)
+            var collection = new WrappingCollection(true, isConcurrent)
             {
                 FactoryMethod = o => o
             };
