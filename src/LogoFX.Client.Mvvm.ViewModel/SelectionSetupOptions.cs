@@ -8,7 +8,15 @@ namespace LogoFX.Client.Mvvm.ViewModel
     public class SelectionSetupOptions : SetupOptions
     {
         private const SelectionMode DefaultSelectionMode = SelectionMode.ZeroOrMore;
+
+        /// <summary>
+        /// Gets the selection mode.
+        /// </summary>
         public SelectionMode SelectionMode { get; private set; } = DefaultSelectionMode;
+
+        /// <summary>
+        /// Gets the selection predicate.
+        /// </summary>
         public Predicate<object> SelectionPredicate { get; private set; }       
 
         /// <summary>

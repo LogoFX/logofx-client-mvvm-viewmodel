@@ -11,11 +11,8 @@ namespace LogoFX.Client.Mvvm.ViewModel.Contracts
     public interface IViewModelsCollection<out T> : IEnumerable<T>, INotifyPropertyChanged, INotifyCollectionChanged where T : IViewModel
     {
         /// <summary>
-        /// Gets the <see cref="T"/> at the specified index.
-        /// </summary>
-        /// <value>
-        /// The <see cref="T"/>.
-        /// </value>
+        /// Gets the item at the specified index.
+        /// </summary>       
         /// <param name="index">The index.</param>
         /// <returns></returns>
         T this[int index] { get; }

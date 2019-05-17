@@ -8,11 +8,11 @@ namespace LogoFX.Client.Mvvm.ViewModel.Interfaces
     public interface IEditableViewModel
     {
         /// <summary>
-        /// Returns <see cref="true"/> if the view model has changes, <see cref="false"/> otherwise. />
+        /// Returns <c>true</c> if the view model has changes, <c>false</c> otherwise. />
         /// </summary>
         bool IsDirty { get; }
         /// <summary>
-        /// Returns <see cref="true"/> if the view model has errors, <see cref="false"/> otherwise. />
+        /// Returns <c>true</c> if the view model has errors, <c>false</c> otherwise. />
         /// </summary>
         bool HasErrors { get; }
         /// <summary>

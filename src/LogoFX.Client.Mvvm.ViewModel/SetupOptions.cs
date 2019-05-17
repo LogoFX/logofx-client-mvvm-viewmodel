@@ -5,8 +5,15 @@
     /// </summary>
     public class SetupOptions
     {
-        public bool IsBulk { get; protected set; }
-        public bool IsConcurrent { get; protected set; }
+        /// <summary>
+        /// Gets or sets the values indicating whether to use bulk mode.
+        /// </summary>
+        public bool IsBulk { get; set; }
+
+        /// <summary>
+        /// Gets or sets the value indicating whether to use concurrent data structures.
+        /// </summary>
+        public bool IsConcurrent { get; set; }
 
         /// <summary>
         /// Configures the setup to use bulk mode.
