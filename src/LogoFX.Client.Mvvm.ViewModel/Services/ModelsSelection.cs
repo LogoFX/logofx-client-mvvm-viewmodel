@@ -63,10 +63,7 @@ namespace LogoFX.Client.Mvvm.ViewModel.Services
         public void UpdateSelection(IEnumerable<TItem> newSelection)
         {
             Selection = newSelection;
-            if (SelectionChanged != null)
-            {
-                SelectionChanged(this, new EventArgs());
-            }
+            SelectionChanged?.Invoke(this, new EventArgs());
         }
     }
 }

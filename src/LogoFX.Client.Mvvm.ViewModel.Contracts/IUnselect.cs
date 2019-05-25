@@ -6,7 +6,7 @@
     public interface IUnselect
     {
         /// <summary>
-        /// Unselects the specified item.
+        /// Deselects the specified item.
         /// </summary>
         /// <param name="item">The specified item.</param>
         /// <param name="notify">True, if the selection change should raise notification.</param>

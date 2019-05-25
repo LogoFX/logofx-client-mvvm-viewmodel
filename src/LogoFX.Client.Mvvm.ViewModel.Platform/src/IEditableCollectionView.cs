@@ -1,7 +1,7 @@
 namespace LogoFX.Client.Mvvm.ViewModel
 {
     /// <summary>
-    /// Implements a WinRT version of the IEditableCollectionView interface.
+    /// Implements a UWP version of the <see cref="IEditableCollectionView"/>.
     /// </summary>
     public interface IEditableCollectionView
     {

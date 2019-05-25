@@ -555,18 +555,10 @@ namespace LogoFX.Client.Mvvm.ViewModel
             }
 
             private TValue _value;
-
-            public TValue Value
-            {
-                get { return _value; }
-            }
+            public TValue Value => _value;
 
             private TKey _key;
-
-            public TKey Key
-            {
-                get { return _key; }
-            }
+            public TKey Key => _key;
         }
 
         internal class DictionaryBeforeEventArgs<TKey, TValue> : DictionaryEventArgs<TKey, TValue>
@@ -578,7 +570,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
             }
 
             private bool _bubble = true;
-
             public bool Bubble
             {
                 get { return _bubble; }
@@ -594,7 +585,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
             }
 
             private bool _bubble = true;
-
             public bool Bubble
             {
                 get { return _bubble; }

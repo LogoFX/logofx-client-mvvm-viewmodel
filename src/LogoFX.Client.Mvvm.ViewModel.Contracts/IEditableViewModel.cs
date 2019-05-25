@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace LogoFX.Client.Mvvm.ViewModel.Interfaces
+namespace LogoFX.Client.Mvvm.ViewModel.Contracts
 {
     /// <summary>
     /// Represents an editable view model

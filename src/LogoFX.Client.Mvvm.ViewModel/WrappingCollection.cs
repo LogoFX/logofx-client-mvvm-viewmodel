@@ -113,7 +113,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
         public bool AddSource(IEnumerable source)
         {
             if(source == null)
-                throw new ArgumentNullException("source");
+                throw new ArgumentNullException(nameof(source));
 
             if (!_sources.Contains(source))
             {

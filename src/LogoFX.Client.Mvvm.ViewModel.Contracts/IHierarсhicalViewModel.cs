@@ -11,7 +11,7 @@
         IViewModelsCollection<IObjectViewModel> Children { get; }
 
         /// <summary>
-        /// Gets the items.(GLUE:compatibility to caliburn micro)
+        /// Gets the items.(GLUE:compatibility to Caliburn.Micro)
         /// </summary>
         IViewModelsCollection<IObjectViewModel> Items { get; }        
     }

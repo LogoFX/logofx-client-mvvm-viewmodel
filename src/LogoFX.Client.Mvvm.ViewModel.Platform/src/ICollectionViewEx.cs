@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Data;
 namespace LogoFX.Client.Mvvm.ViewModel
 {
     /// <summary>
-    /// Extends the WinRT ICollectionView to provide sorting and filtering.
+    /// Extends the platform <see cref="ICollectionView"/> to provide sorting and filtering.
     /// </summary>
     public interface ICollectionViewEx : ICollectionView
     {
@@ -44,7 +44,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// Get the underlying collection.
         /// </summary>
         IEnumerable SourceCollection { get; }
-
         /// <summary>
         /// Gets or sets the custom sort comparer.
         /// </summary>

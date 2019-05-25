@@ -259,8 +259,8 @@ namespace LogoFX.Client.Mvvm.ViewModel
                         {
                             Dispatch.Current.BeginOnUiThread(() =>
                             {
-                                int newindex = e.NewStartingIndex;
-                                InsertRangeHandler(e.NewItems.Cast<object>(), newindex);
+                                int newStartingIndex = e.NewStartingIndex;
+                                InsertRangeHandler(e.NewItems.Cast<object>(), newStartingIndex);
                             });
                         }
                     });
