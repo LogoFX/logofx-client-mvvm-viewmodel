@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-#if NET
+#if NET || NETCORE
 using System.Windows.Data;
 #endif
 
@@ -59,7 +59,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
             return collectionView;
         }        
 
-#if NET
+#if NET || NETCORE
 /// <summary>
         /// Groups the specified collection view according to the specified property name.
         /// </summary>

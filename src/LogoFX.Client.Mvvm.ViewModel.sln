@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2010
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29311.281
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogoFX.Client.Mvvm.ViewModel.Platform.NET", "LogoFX.Client.Mvvm.ViewModel.Platform\net\LogoFX.Client.Mvvm.ViewModel.Platform.NET.csproj", "{E96CB49C-8AA8-4CBC-B143-4C4DA11998F5}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogoFX.Client.Mvvm.ViewModel.Platform.UWP", "LogoFX.Client.Mvvm.ViewModel.Platform\uwp\LogoFX.Client.Mvvm.ViewModel.Platform.UWP.csproj", "{5830102C-BF7D-468B-8866-27C4250DFA87}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogoFX.Client.Mvvm.ViewModel.Tests", "LogoFX.Client.Mvvm.ViewModel.Tests\LogoFX.Client.Mvvm.ViewModel.Tests.csproj", "{ECC49C29-4FDD-470A-84F9-5088D01E1F98}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogoFX.Client.Mvvm.ViewModel.Platform.NETCore", "LogoFX.Client.Mvvm.ViewModel.Platform\netcore\LogoFX.Client.Mvvm.ViewModel.Platform.NETCore.csproj", "{6E19F0B4-77EF-4B56-80E6-BB7CF478BD94}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +107,22 @@ Global
 		{ECC49C29-4FDD-470A-84F9-5088D01E1F98}.Release|x64.Build.0 = Release|Any CPU
 		{ECC49C29-4FDD-470A-84F9-5088D01E1F98}.Release|x86.ActiveCfg = Release|Any CPU
 		{ECC49C29-4FDD-470A-84F9-5088D01E1F98}.Release|x86.Build.0 = Release|Any CPU
+		{6E19F0B4-77EF-4B56-80E6-BB7CF478BD94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E19F0B4-77EF-4B56-80E6-BB7CF478BD94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E19F0B4-77EF-4B56-80E6-BB7CF478BD94}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{6E19F0B4-77EF-4B56-80E6-BB7CF478BD94}.Debug|ARM.Build.0 = Debug|Any CPU
+		{6E19F0B4-77EF-4B56-80E6-BB7CF478BD94}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{6E19F0B4-77EF-4B56-80E6-BB7CF478BD94}.Debug|x64.Build.0 = Debug|Any CPU
+		{6E19F0B4-77EF-4B56-80E6-BB7CF478BD94}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6E19F0B4-77EF-4B56-80E6-BB7CF478BD94}.Debug|x86.Build.0 = Debug|Any CPU
+		{6E19F0B4-77EF-4B56-80E6-BB7CF478BD94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E19F0B4-77EF-4B56-80E6-BB7CF478BD94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E19F0B4-77EF-4B56-80E6-BB7CF478BD94}.Release|ARM.ActiveCfg = Release|Any CPU
+		{6E19F0B4-77EF-4B56-80E6-BB7CF478BD94}.Release|ARM.Build.0 = Release|Any CPU
+		{6E19F0B4-77EF-4B56-80E6-BB7CF478BD94}.Release|x64.ActiveCfg = Release|Any CPU
+		{6E19F0B4-77EF-4B56-80E6-BB7CF478BD94}.Release|x64.Build.0 = Release|Any CPU
+		{6E19F0B4-77EF-4B56-80E6-BB7CF478BD94}.Release|x86.ActiveCfg = Release|Any CPU
+		{6E19F0B4-77EF-4B56-80E6-BB7CF478BD94}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>LogoFX.Client.Mvvm.ViewModel.Platform</AssemblyName>
+    <RootNamespace>LogoFX.Client.Mvvm.ViewModel</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\Bin\netcore\Release\</OutputPath>
+    <DocumentationFile>..\..\Bin\netcore\Release\LogoFX.Client.Mvvm.ViewModel.Platform.xml</DocumentationFile>
+    <DefineConstants>TRACE;NETCORE</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\src\WrappingCollectionExtensions.cs" Link="WrappingCollectionExtensions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\LogoFX.Client.Mvvm.ViewModel\LogoFX.Client.Mvvm.ViewModel.csproj" />
+  </ItemGroup>
+
+</Project>
