@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+﻿using System.Linq;
 using LogoFX.Client.Mvvm.ViewModel.Contracts;
 using LogoFX.Core;
 
@@ -73,59 +70,5 @@ namespace LogoFX.Client.Mvvm.ViewModel
 
         
         #endregion
-    }
-
-    /// <summary>
-    /// Helper class for enum operations.
-    /// </summary>
-    public static class EnumHelper
-    {
-        private static readonly IDictionary<Type, object[]> _enumCache = new Dictionary<Type, object[]>();
-
-        /// <summary>
-        /// Gets the boxed enum value.
-        /// </summary>
-        /// <param name="s">The unboxed enum value.</param>
-        /// <returns></returns>
-        public static object GetBoxed(Enum s)
-        {
-            Type enumType = s.GetType();
-            object ret = GetValues(enumType).Where(ss => ss.ToString() == s.ToString()).FirstOrDefault();
-            return ret;
-        }
-
-        /// <summary>
-        /// Gets all enum values from the specified enum type.
-        /// </summary>
-        /// <typeparam name="T">The specified enum type.</typeparam>
-        /// <returns></returns>
-        public static T[] GetValues<T>()
-        {
-            return GetValues(typeof (T)).Cast<T>().ToArray();
-        }
-
-        /// <summary>
-        /// Gets the unboxed enum values from the specified enum type.
-        /// </summary>
-        /// <param name="enumType">Type of the enum.</param>
-        /// <returns></returns>
-        /// <exception cref="System.ArgumentException">Type ' + enumType.Name + ' is not an enum</exception>
-        public static object[] GetValues(Type enumType)
-        {
-            if (enumType.GetTypeInfo().IsEnum == false)
-            {
-                throw new ArgumentException("Type '" + enumType.Name + "' is not an enum");
-            }
-                     
-            object[] values;
-            if (!_enumCache.TryGetValue(enumType, out values))
-            {
-                values = (from field in enumType.GetTypeInfo().DeclaredFields
-                          where field.IsLiteral
-                          select field.GetValue(enumType)).ToArray();
-                _enumCache[enumType] = values;
-            }
-            return values;
-        }
     }
 }
