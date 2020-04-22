@@ -39,7 +39,7 @@
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\Bin\uwp\Release\LogoFX.Client.Mvvm.ViewModel.Platform.XML</DocumentationFile>   
+    <DocumentationFile>..\..\Bin\uwp\Release\LogoFX.Client.Mvvm.ViewModel.Platform.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <PlatformTarget>x86</PlatformTarget>
@@ -131,10 +131,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="LogoFX.Client.Core.Core">
-      <Version>2.1.1-rc1</Version>
+      <Version>2.2.0-rc1</Version>
     </PackageReference>
     <PackageReference Include="LogoFX.Core">
-      <Version>2.1.0</Version>
+      <Version>2.2.0-rc1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.10</Version>
