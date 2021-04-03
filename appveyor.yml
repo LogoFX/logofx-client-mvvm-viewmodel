@@ -8,4 +8,19 @@ image: Visual Studio 2019
 
 build:
   verbosity: minimal
-  project: .\src\LogoFX.Client.Mvvm.ViewModel.sln
+  project: ./src/LogoFX.Client.Mvvm.ViewModel.sln
+
+test_script:
+  - cd ../devops/test
+  - test-all.bat
+  - cd ../../
+
+after_test:
+  - cd devops
+  - cd pack
+  - pack-all
+
+artifacts:
+
+  - name: Packages
+    path: ./output/*.nupkg

@@ -10,6 +10,7 @@
     <RootNamespace>LogoFX.Client.Mvvm.ViewModel</RootNamespace>
     <AssemblyName>LogoFX.Client.Mvvm.ViewModel.Platform</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RuntimeIdentifier>win</RuntimeIdentifier>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
