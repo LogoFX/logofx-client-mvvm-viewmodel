@@ -13,10 +13,8 @@ build:
 test_script:
   - cd ../devops/test
   - test.bat
-  - cd ../../
 
-after_test:
-  - cd devops
+after_test:  
   - cd pack
   - pack-all
 
