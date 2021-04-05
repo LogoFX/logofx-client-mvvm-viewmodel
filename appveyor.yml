@@ -1,3 +1,5 @@
+version: 2.2.0.{build}
+
 configuration: Release
 
 before_build:
