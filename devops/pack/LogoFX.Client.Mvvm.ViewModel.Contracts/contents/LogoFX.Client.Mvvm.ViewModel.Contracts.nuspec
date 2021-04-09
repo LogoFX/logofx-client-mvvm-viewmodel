@@ -13,5 +13,5 @@
     <description>LogoFX Client Mvvm ViewModel Contracts containing view model contracts and abstractions which facilitate MVVM-based client development</description>
     <summary>LogoFX Client Mvvm ViewModel Contracts containing view model contracts and abstractions</summary>
     <releaseNotes>Updated dependent packages</releaseNotes>
-  </metadata>  
+  </metadata>
 </package>

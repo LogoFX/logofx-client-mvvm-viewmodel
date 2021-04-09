@@ -1,26 +1,19 @@
 version: 2.2.0.{build}
-
 configuration: Release
-
 before_build:
 - cd src
 - nuget restore
-
 image: Visual Studio 2019
-
 build:
   verbosity: minimal
   project: ./src/LogoFX.Client.Mvvm.ViewModel.sln
-
 test_script:
-  - cd ../devops/test
-  - test.bat
-
-after_test:  
-  - cd pack
-  - pack-all
-
+- cd ../devops/test
+- test.bat
+after_test:
+- cd pack
+- pack-all
 artifacts:
-
-  - name: Packages
-    path: ./output/*.nupkg
+- name: Packages
+  path: ./output/*.nupkg
+...

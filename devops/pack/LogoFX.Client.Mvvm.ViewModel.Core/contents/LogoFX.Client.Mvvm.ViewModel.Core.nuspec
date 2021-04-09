@@ -18,5 +18,5 @@
       <dependency id="LogoFX.Client.Core.Core" version="2.2.0-rc2" />
       <dependency id="LogoFX.Client.Mvvm.ViewModel.Contracts" version="2.2.0-rc2" />
     </dependencies>
-  </metadata> 
+  </metadata>
 </package>
