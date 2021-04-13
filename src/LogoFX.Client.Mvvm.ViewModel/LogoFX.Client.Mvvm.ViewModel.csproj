@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
@@ -12,8 +12,8 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="LogoFX.Client.Core.Core" Version="2.2.0-rc1" />
-    <PackageReference Include="LogoFX.Core" Version="2.2.0-rc1" />
+    <PackageReference Include="LogoFX.Client.Core.Core" Version="2.2.0-rc2" />
+    <PackageReference Include="LogoFX.Core" Version="2.2.0-rc2" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LogoFX.Client.Mvvm.ViewModel.Contracts\LogoFX.Client.Mvvm.ViewModel.Contracts.csproj" />
