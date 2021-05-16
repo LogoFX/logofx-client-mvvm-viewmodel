@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-#if NET || NETCORE
+#if NET || NETCORE || NETFRAMEWORK
 using System.Windows.Data;
 #endif
 

@@ -1,0 +1,15 @@
+{
+  "data": [
+    {
+      "id": "LogoFX.Client.Mvvm.ViewModel.Contracts"
+    },
+    {
+      "id": "LogoFX.Client.Mvvm.ViewModel.Core",
+      "dependencies": [ "LogoFX.Client.Mvvm.ViewModel.Contracts" ]
+    },
+    {
+      "id": "LogoFX.Client.Mvvm.ViewModel",
+      "dependencies": [ "LogoFX.Client.Mvvm.ViewModel.Core" ]
+    }  
+  ]
+}
