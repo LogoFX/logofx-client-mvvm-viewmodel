@@ -18,5 +18,7 @@
       <dependency id="LogoFX.Client.Core.Core" version="2.2.0" />
       <dependency id="LogoFX.Client.Mvvm.ViewModel.Contracts" version="2.2.0" />
     </dependencies>
+    <tags>framework logofx dotnet</tags>
+    <repository type="Open Source" url="https://github.com/LogoFX/logofx-client-mvvm-viewmodel" />
   </metadata>
 </package>

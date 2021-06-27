@@ -12,6 +12,8 @@
     <iconUrl>https://github.com/LogoFX/logofx-assets/blob/master/icons/icon.png?raw=true</iconUrl>
     <description>LogoFX Client Mvvm ViewModel Contracts containing view model contracts and abstractions which facilitate MVVM-based client development</description>
     <summary>LogoFX Client Mvvm ViewModel Contracts containing view model contracts and abstractions</summary>
-    <releaseNotes>Updated dependent packages</releaseNotes>
+    <releaseNotes></releaseNotes>
+    <tags>framework logofx dotnet</tags>
+    <repository type="Open Source" url="https://github.com/LogoFX/logofx-client-mvvm-viewmodel" />
   </metadata>
 </package>
