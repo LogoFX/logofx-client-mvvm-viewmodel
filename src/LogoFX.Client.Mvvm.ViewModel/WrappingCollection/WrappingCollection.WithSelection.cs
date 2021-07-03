@@ -36,9 +36,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
             /// </summary>
             public WithSelection()
                 :this(selectionMode: DefaultSelectionMode, isBulk: false)
-            {
-                
-            }
+            {}
 
             /// <summary>
             /// Initializes a new instance of the <see cref="WrappingCollection.WithSelection"/> class.
@@ -72,8 +70,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
             /// <param name="configSelectionSetupOptions">The selection setup options configuration.</param>
             public WithSelection(Func<SelectionSetupOptions, SelectionSetupOptions> configSelectionSetupOptions)
                 : this(configSelectionSetupOptions(new SelectionSetupOptions()))
-            {
-            }
+            {}
 
             /// <summary>
             /// Initializes a new instance of the <see cref="WrappingCollection.WithSelection"/> class.
@@ -94,6 +91,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
             }            
 
             #region Private implementation
+
             private bool HandleItemSelectionChanged(object obj, bool isSelecting)
             {
                 using (_selectionManagement.Raise())
@@ -294,7 +292,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
-
                 }
 
                 base.OnCollectionChanged(e);
@@ -381,8 +378,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
             /// Override this method to inject custom logic after the selection is changed.
             /// </summary>
             protected virtual void OnSelectionChanged()
-            {
-            }
+            {}
 
             /// <summary>
             /// Gets or sets the selection handler.

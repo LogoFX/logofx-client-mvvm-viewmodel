@@ -35,4 +35,3 @@ namespace LogoFX.Client.Mvvm.ViewModel
         public ListSortDirection Direction { get; set; }
     }
 }
-

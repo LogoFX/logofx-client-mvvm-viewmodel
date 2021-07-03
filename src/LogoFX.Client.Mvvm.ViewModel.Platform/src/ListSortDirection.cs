@@ -13,6 +13,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// <summary>
         /// The descending sort direction.
         /// </summary>
-        Descending = 1,
+        Descending = 1
     }
 }
