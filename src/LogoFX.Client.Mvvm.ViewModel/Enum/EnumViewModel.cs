@@ -5,22 +5,6 @@ using LogoFX.Core;
 namespace LogoFX.Client.Mvvm.ViewModel
 {
     /// <summary>
-    /// Represents a view model which wraps around an enum value.
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class EnumEntryViewModel<T>:ObjectViewModel<T>
-    {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="EnumEntryViewModel{T}"/> class.
-        /// </summary>
-        /// <param name="obj">The object.</param>
-        public EnumEntryViewModel(T obj):base(obj)
-        {
-            
-        }        
-    }
-
-    /// <summary>
     /// Represents a view model which wraps around a collection of enum values.
     /// </summary>
     /// <typeparam name="T"></typeparam>
@@ -68,7 +52,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
             get { return _children?? (_children = new ObservableViewModelsCollection<IObjectViewModel>()); }
         }
 
-        
         #endregion
     }
 }

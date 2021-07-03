@@ -11,6 +11,7 @@
         /// <remarks>Usually synchronized with focus</remarks>
         object CurrentItem { get; }
     }
+
     /// <summary>
     /// Object that have current item
     /// </summary>
@@ -23,5 +24,4 @@
         /// <remarks>Usually synchronized with focus</remarks>
         new T CurrentItem { get; }
     }
-
 }

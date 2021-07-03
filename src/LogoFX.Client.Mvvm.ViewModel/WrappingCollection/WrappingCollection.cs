@@ -204,7 +204,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
             {
                 OnCollectionChanged(args);
             }
-
             catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
