@@ -11,9 +11,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
     /// <summary>
     /// Base class for <c>ViewModels</c>.
     /// </summary>
-    public abstract class ViewModelBase : NotifyPropertyChangedBase<ViewModelBase>, IDisposable, IViewModel
-        , INotifyDataErrorInfo
-
+    public abstract class ViewModelBase : NotifyPropertyChangedBase<ViewModelBase>, IDisposable, IViewModel, INotifyDataErrorInfo
     {
         #region IsEnabled property
 

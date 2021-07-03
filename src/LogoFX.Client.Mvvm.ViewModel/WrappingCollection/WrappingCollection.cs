@@ -20,7 +20,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
         private readonly IIndexedDictionaryFactory _indexedDictionaryFactory;
         private Func<object, object> _factoryMethod;
         private readonly Func<object,object> _defaultFactoryMethod =
-            a => new { Model = a } ;
+            a => new { Model = a };
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WrappingCollection"/> class.
@@ -77,7 +77,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
             get { return _loadingViewModel; }
             set
             {
-
                 if (value != null && _collectionManager.ItemsCount == 0)
                 {
                     _collectionManager.Add(value);
@@ -178,7 +177,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
             {
                 OnBeforeClear(args.Items);
             }
-
             catch (Exception e)
             {
                 Debug.WriteLine(e.Message);

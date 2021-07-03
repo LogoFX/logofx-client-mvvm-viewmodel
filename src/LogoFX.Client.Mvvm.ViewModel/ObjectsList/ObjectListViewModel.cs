@@ -130,7 +130,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
                             i.OfType<object>().ToList().ForEach(item => ListCollectionChanged(i, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, 0)));
                             if (i is INotifyCollectionChanged)
 								((INotifyCollectionChanged)i).CollectionChanged += WeakDelegate.From(ListCollectionChanged);
-
                         }
                         );
                     break;
@@ -262,9 +261,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
 // ReSharper disable EmptyGeneralCatchClause
             catch (Exception)
 // ReSharper restore EmptyGeneralCatchClause
-            {
-                
-            }
+            {}
             try
             {
                 if (ChildrenChanged != null)
@@ -289,7 +286,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
         {
             get
             {
-
                 //lazy init))
                 if (_modelLists == null)
                 {
@@ -299,9 +295,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
                     //_modelListsLazy.Apply(a=>_modelLists.Add(a));
                     for (int i = 0; i < _modelListsLazy.Count; i++)
                     {
-
                         _modelLists.Add(_modelListsLazy[i]);
-
                     }
                     IsBusy = false;
                 }
