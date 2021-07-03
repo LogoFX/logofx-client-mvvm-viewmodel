@@ -43,8 +43,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// <param name="newValue">New Value</param>
         /// <param name="oldValue">Old Value</param>
         protected virtual void OnIsEnabledChangedOverride(bool newValue, bool oldValue)
-        {
-        }
+        {}
 
         #endregion
 
@@ -87,8 +86,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// <param name="newValue">New Value</param>
         /// <param name="oldValue">Old Value</param>
         protected virtual void OnIsExpandedChangedOverride(bool newValue, bool oldValue)
-        {
-        }
+        {}
 
         #endregion
 
@@ -120,8 +118,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// <param name="newValue">New Value</param>
         /// <param name="oldValue">Old Value</param>
         protected virtual void OnIsCurrentChangedOverride(bool newValue, bool oldValue)
-        {
-        }
+        {}
 
         #endregion
 
@@ -153,15 +150,13 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// <param name="newValue">New Value</param>
         /// <param name="oldValue">Old Value</param>
         protected virtual void OnIsSelectedChangedOverride(bool newValue, bool oldValue)
-        {
-        }
+        {}
 
         #endregion
 
         #region LastError property
 
         private string _lastError;
-
         /// <summary>
         /// LastError property
         /// </summary>
@@ -186,15 +181,13 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// <param name="newValue">New Value</param>
         /// <param name="oldValue">Old Value</param>
         protected virtual void OnLastErrorChangedOverride(string newValue, string oldValue)
-        {
-        }
+        {}
 
         #endregion
 
         #region IsBusy property
 
         private bool _isBusy;
-
         /// <summary>
         /// IsBusy property
         /// </summary>
@@ -219,8 +212,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// <param name="newValue">New Value</param>
         /// <param name="oldValue">Old Value</param>
         protected virtual void OnIsBusyChangedOverride(bool newValue, bool oldValue)
-        {
-        }
+        {}
 
         #endregion
 
@@ -252,8 +244,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// <param name="newValue">New Value</param>
         /// <param name="oldValue">Old Value</param>
         protected virtual void OnParentChangedOverride(IViewModel newValue, IViewModel oldValue)
-        {
-        }
+        {}
 
         #endregion
 
@@ -264,9 +255,8 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// </summary>
         /// <filterpriority>2</filterpriority>
         public virtual void Dispose()
-        {
+        {}
 
-        }
         #endregion
 
         private readonly Dictionary<string, List<string>> _currentErrors = new Dictionary<string, List<string>>();
@@ -313,7 +303,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// <param name="expression">The expression that designates the property.</param>
         public void ClearErrorFromProperty<TProperty>(Expression<Func<TProperty>> expression)
         {
-           
             string property = expression.GetPropertyName();
             _currentErrors.Remove(property);
             FireErrorsChanged(property);
