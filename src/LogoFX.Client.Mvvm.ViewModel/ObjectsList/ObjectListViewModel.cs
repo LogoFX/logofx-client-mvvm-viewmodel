@@ -20,7 +20,6 @@ using LogoFX.Core;
 
 namespace LogoFX.Client.Mvvm.ViewModel
 {
-
     /// <summary>
     /// Base class for any <c>ViewModels</c> that are wrapping some objects list
     /// </summary>
@@ -81,7 +80,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
             if (models != null)
                 _modelListsLazy.Add(models);
             _modelListsLazy.Add(_internalList);
-
         }
 
         #endregion
@@ -97,7 +95,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
             get { return _loadingViewModel; }
             set
             {
-                
                 if (value != null && InternalChildren.Count == 0)
                 {
                     InternalChildren.Add(value);
@@ -111,6 +108,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
         }
 
         #region Private
+
         private IObjectViewModel CreateViewModel(object model)
         {
             return _modelfactory.CreateViewModel(this, model);
@@ -119,6 +117,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
         #endregion
 
         #region Lists management
+
         private void ModelListsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
@@ -163,7 +162,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
                             i.OfType<object>().ToList().ForEach(item => ListCollectionChanged(i, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, 0)));
                             if (i is INotifyCollectionChanged)
                                 ((INotifyCollectionChanged)i).CollectionChanged += WeakDelegate.From(ListCollectionChanged);
-
                         }
                         );
                     break;
@@ -267,7 +265,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
             {
                 
             }
-
             try
             {
                 if (ChildrenChanged != null)
@@ -389,7 +386,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
                 .OfType<INotifyCollectionChanged>()
                 .ForEach(ml => ml.CollectionChanged -= ListCollectionChanged);
         }
-        
+
         #endregion
     }
 }
