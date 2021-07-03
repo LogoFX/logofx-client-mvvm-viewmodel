@@ -54,7 +54,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
                 }
             }
 
-
             #endregion
 
             #region Properties
@@ -244,7 +243,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
                 }
             }
 
-
             public TValue this[int index]
             {
                 get { return this[m_col[index]]; }
@@ -317,7 +315,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
                     throw new IndexedDictionaryException("Key of type int is not supported.");
                 }
             }
-
 
             #endregion
 
@@ -511,7 +508,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
                 }
             }
 
-
             public TValue this[int index]
             {
                 get { return this[m_col[index]]; }
@@ -565,9 +561,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
         {
             public DictionaryBeforeEventArgs(TKey key, TValue value)
                 : base(key, value)
-            {
-
-            }
+            {}
 
             private bool _bubble = true;
             public bool Bubble
@@ -580,9 +574,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
         internal class DictionaryBeforeClearEventArgs
         {
             public DictionaryBeforeClearEventArgs()
-            {
-
-            }
+            {}
 
             private bool _bubble = true;
             public bool Bubble
@@ -595,21 +587,15 @@ namespace LogoFX.Client.Mvvm.ViewModel
         internal class IndexedDictionaryException : Exception
         {
             public IndexedDictionaryException()
-            {
-
-            }
+            {}
 
             public IndexedDictionaryException(string message)
                 : base(message)
-            {
-
-            }
+            {}
 
             public IndexedDictionaryException(string message, Exception innerException)
                 : base(message, innerException)
-            {
-
-            }
+            {}
         }
     }
 }
