@@ -113,7 +113,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
                     // save new source as list (so we can add/remove etc)
                     _sourceList = value as IList;
 
-
                     // listen to changes in the source
                     if (_sourceNcc != null)
                     {
@@ -395,7 +394,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
             OnCurrentChanged(null);
             return true;
         }
-
 
         #endregion
 

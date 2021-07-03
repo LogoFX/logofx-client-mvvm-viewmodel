@@ -20,61 +20,6 @@ using LogoFX.Core;
 
 namespace LogoFX.Client.Mvvm.ViewModel
 {
-    /// <summary>
-    /// Operation type
-    /// </summary>
-    public enum ChildOperation
-    {
-        /// <summary>
-        /// Add operation
-        /// </summary>
-        Add,
-        /// <summary>
-        /// Remove operation
-        /// </summary>
-        Remove
-    }
-
-    /// <summary>
-    /// Child Operation Event Arguments
-    /// </summary>
-    /// <typeparam name="T"> type of child</typeparam>
-    public class ChildEventArgs<T> : EventArgs
-    {
-        private readonly ChildOperation _operation;
-        private readonly T _item;
-        private readonly int _index;
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="operation"></param>
-        /// <param name="item"></param>
-        /// <param name="index"></param>
-        public ChildEventArgs(ChildOperation operation, T item, int index)
-        {
-            _operation = operation;
-            _item = item;
-            _index = index;
-        }
-        /// <summary>
-        /// Added item
-        /// </summary>
-        public T Item { get { return _item; } }
-        /// <summary>
-        /// Changed index
-        /// </summary>
-        public int Index { get { return _index; } }
-
-        /// <summary>
-        /// Gets the action.
-        /// </summary>
-        /// <value>The action.</value>
-        public ChildOperation Action
-        {
-            get { return _operation; }
-        }
-    }
 
     /// <summary>
     /// Base class for any <c>ViewModels</c> that are wrapping some objects list
@@ -102,8 +47,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// <param name="model">The head model.</param>
         public ObjectsListViewModel(object model)
             : this(model, null, null)
-        {
-        }
+        {}
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ObjectsListViewModel"/> class.
@@ -112,8 +56,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// <param name="models">The child models.</param>
         public ObjectsListViewModel(object model, IEnumerable models)
             : this(model, models, null)
-        {
-        }
+        {}
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ObjectsListViewModel"/> class.
@@ -122,9 +65,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// <param name="viewModelFactory">The factory for creating child <c>ViewModels</c>.</param>
         public ObjectsListViewModel(object model, IObjectViewModelFactory viewModelFactory)
             : this(model, null, viewModelFactory)
-        {
-        }
-
+        {}
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ObjectsListViewModel"/> class.
@@ -137,12 +78,12 @@ namespace LogoFX.Client.Mvvm.ViewModel
         {
             _modelfactory = viewModelFactory ?? this;
 
-
             if (models != null)
                 _modelListsLazy.Add(models);
             _modelListsLazy.Add(_internalList);
 
         }
+
         #endregion
 
         /// <summary>
@@ -174,6 +115,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
         {
             return _modelfactory.CreateViewModel(this, model);
         }
+
         #endregion
 
         #region Lists management
@@ -251,7 +193,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
                             });
                     }
 
-
                     break;
 
                 case NotifyCollectionChangedAction.Remove:
@@ -288,7 +229,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
                     Dispatch.Current.BeginOnUiThread(
                         () =>
                         {
-
                             HashSet<IObjectViewModel> hs = new HashSet<IObjectViewModel>(Children);
                             foreach (IObjectViewModel c in hs)
                             {
@@ -338,8 +278,8 @@ namespace LogoFX.Client.Mvvm.ViewModel
 // ReSharper restore EmptyGeneralCatchClause
             {
             }
-
         }
+
         #endregion
 
         #region Public properties
@@ -404,7 +344,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
             }
         }
 
-
         #endregion
 
         #region Protected Implementation
@@ -419,13 +358,12 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// </summary>
         /// <param name="args">The  instance containing the event data.</param>
         protected virtual void OnChildrenChanged(ChildEventArgs<IObjectViewModel> args)
-        {
-
-        }
+        {}
 
         #endregion
 
         #region IObjectViewModelFactory
+
         /// <summary>
         /// Creates view model
         /// </summary>
@@ -436,6 +374,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
         {
             return new ObjectViewModel<object>(obj);
         }
+
         #endregion
 
         #region IDisposable
@@ -450,6 +389,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
                 .OfType<INotifyCollectionChanged>()
                 .ForEach(ml => ml.CollectionChanged -= ListCollectionChanged);
         }
+        
         #endregion
     }
 }

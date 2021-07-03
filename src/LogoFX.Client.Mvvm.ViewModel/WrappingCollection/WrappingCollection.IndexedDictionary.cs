@@ -437,7 +437,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
                         AfterRemove.Invoke(this, e);
                     }
                 }
-               
             }
 
             public TKey GetKeyByIndex(int index)
