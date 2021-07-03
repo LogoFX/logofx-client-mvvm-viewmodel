@@ -6,8 +6,7 @@ namespace LogoFX.Client.Mvvm.ViewModel.Contracts
     /// <see cref="IViewModel"/> that wraps some object
     /// </summary>
     public interface IObjectViewModel : IViewModel, IDisposable, IModelWrapper
-    {
-    }
+    {}
 
     /// <summary>
     /// <see cref="IViewModel"/> that wraps some object
@@ -20,6 +19,6 @@ namespace LogoFX.Client.Mvvm.ViewModel.Contracts
         /// </summary>
         /// <value>The object model.</value>
         [Obsolete("Use IModelWrapper<T>.Model")]
-         T ObjectModel { get;}
+         T ObjectModel { get; }
     }
 }

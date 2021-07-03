@@ -20,26 +20,21 @@ namespace LogoFX.Client.Mvvm.ViewModel
         private readonly IIndexedDictionaryFactory _indexedDictionaryFactory;
         private Func<object, object> _factoryMethod;
         private readonly Func<object,object> _defaultFactoryMethod =
-            a => new { Model = a }
-            ;
+            a => new { Model = a };
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WrappingCollection"/> class.
         /// </summary>
         public WrappingCollection()
             :this(isBulk: false, isConcurrent:false)
-        {
-            
-        }
+        {}
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WrappingCollection"/> class.
         /// </summary>
         public WrappingCollection(SetupOptions setupOptions)
             :this(setupOptions.IsBulk, setupOptions.IsConcurrent)
-        {
-                
-        }
+        {}
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WrappingCollection"/> class.
@@ -47,8 +42,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// <param name="configSetupOptions">The setup options configuration.</param>
         public WrappingCollection(Func<SetupOptions, SetupOptions> configSetupOptions)
             :this(configSetupOptions(new SetupOptions()).IsBulk, configSetupOptions(new SetupOptions()).IsConcurrent)
-        {            
-        }
+        {}
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WrappingCollection"/> class.
@@ -83,7 +77,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
             get { return _loadingViewModel; }
             set
             {
-
                 if (value != null && _collectionManager.ItemsCount == 0)
                 {
                     _collectionManager.Add(value);
@@ -136,7 +129,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
                 return true;
             }
             return false;
-            
         }
 
         /// <summary>
@@ -185,7 +177,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
             {
                 OnBeforeClear(args.Items);
             }
-
             catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
@@ -198,8 +189,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// </summary>
         /// <param name="items">The items to be cleared.</param>
         protected virtual void OnBeforeClear(IEnumerable<object> items)
-        {
-        }
+        {}
 
         private void OnCollectionChangedCore(object o, NotifyCollectionChangedEventArgs args)
         {
@@ -212,7 +202,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
             {
                 OnCollectionChanged(args);
             }
-
             catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
@@ -224,8 +213,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// </summary>
         /// <param name="args"></param>
         protected virtual void OnCollectionChanged(NotifyCollectionChangedEventArgs args)
-        {
-        }
+        {}
 
         /// <summary>
         /// Occurs when the collection changes.

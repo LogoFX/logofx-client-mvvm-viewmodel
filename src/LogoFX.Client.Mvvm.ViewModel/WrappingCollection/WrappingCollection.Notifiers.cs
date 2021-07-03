@@ -281,6 +281,5 @@ namespace LogoFX.Client.Mvvm.ViewModel
                     throw new ArgumentOutOfRangeException();
             }
         }
-
     }
 }

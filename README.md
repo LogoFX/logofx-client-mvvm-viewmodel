@@ -3,6 +3,8 @@ view model layer objects, implementing basic concerns.
 
 <img src=https://ci.appveyor.com/api/projects/status/github/logofx/logofx-client-mvvm-viewmodel>
 
+[![CodeFactor](https://www.codefactor.io/repository/github/logofx/logofx-client-mvvm-viewmodel/badge)](https://www.codefactor.io/repository/github/logofx/logofx-client-mvvm-viewmodel)
+
 ## Contracts
 
 <img src=https://img.shields.io/nuget/dt/LogoFX.Client.Mvvm.ViewModel.Contracts>

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -9,83 +9,6 @@ using LogoFX.Core;
 
 namespace LogoFX.Client.Mvvm.ViewModel
 {
-    /// <summary>
-    /// Represents proxy to the real property on the model.
-    /// </summary>
-    public class ModelProxyAttribute : Attribute
-    {
-        private string _property;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ModelProxyAttribute"/> class.
-        /// </summary>
-        /// <param name="property">The property.</param>
-        public ModelProxyAttribute(string property)
-        {
-            _property = property;
-        }
-
-        /// <summary>
-        /// Gets or sets the property.
-        /// </summary>
-        /// <value>
-        /// The property.
-        /// </value>
-        public string Property
-        {
-            get { return _property; }
-            set { _property = value; }
-        }
-    }
-
-    /// <summary>
-    /// Represents object view model for the specified model.
-    /// </summary>
-    /// <typeparam name="T">The specified model.</typeparam>
-    public class ObjectViewModel<T> : ObjectViewModel,IObjectViewModel<T>
-    {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ObjectViewModel&lt;T&gt;"/> class.
-        /// </summary>
-        public ObjectViewModel()
-            : this(default(T))
-        {
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ObjectViewModel&lt;T&gt;"/> class.
-        /// </summary>
-        /// <param name="model">The model.</param>
-        public ObjectViewModel(T model)
-            : base(model)
-        {
-        }
-
-        #region ObjectModel property
-
-        /// <summary>
-        /// ObjectModel property
-        /// </summary>
-        [Obsolete("Use Model instead")]
-        public  T ObjectModel
-        {
-            get { return (T)base.InternalModel; }
-        }
-
-        /// <summary>
-        /// Model property
-        /// </summary>
-        public new T Model
-        {
-            get
-            {
-                return (T)InternalModel;
-            }
-        }
-
-        #endregion
-    }
-
     /// <summary>
     /// <c>ViewModel</c> that wraps arbitrary object
     /// </summary>
@@ -110,8 +33,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// </summary>
         public ObjectViewModel()
             : this(null)
-        {
-        }
+        {}
 
         #region ObjectModel property
 
@@ -171,9 +93,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data.</param>
         protected virtual void OnModelPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-
-        }
+        {}
 
         /// <summary>
         /// Occurs when a model's property is changed.

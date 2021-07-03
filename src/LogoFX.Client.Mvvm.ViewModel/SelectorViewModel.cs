@@ -38,7 +38,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
         private readonly ObservableCollection<IObjectViewModel<TChild>> _selection = new ObservableCollection<IObjectViewModel<TChild>>();
         private PropertyChangedEventHandler _internalSelectionHandler;
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectorViewModel&lt;THead, TChild&gt;"/> class.
         /// </summary>
@@ -50,10 +49,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
             Func<TChild, IObjectViewModel<TChild>> creator,
             SelectionMode selectionMode = DefaultSelectionMode)
             : this(head, models, null, creator, selectionMode)
-        {
-        }
-
-
+        {}
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectorViewModel&lt;THead, TChild&gt;"/> class.
@@ -66,8 +62,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
             Action<SelectorViewModel<THead, TChild>> selectionHandler,
             SelectionMode selectionMode = DefaultSelectionMode)
             : this(head, models, selectionHandler, null, selectionMode)
-        {
-        }
+        {}
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectorViewModel&lt;THead, TChild&gt;"/> class.
@@ -83,9 +78,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
             SelectionMode selectionMode = DefaultSelectionMode)
             : base(head, models, creator)
         {
-
             _selectionMode = selectionMode;
-
             if (selectionHandler != null)
             {
                 //week needed:potential foreign
@@ -98,9 +91,7 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// </summary>
         /// <param name="e">The instance containing the event data.</param>
         protected virtual void OnChildrenSelectionChanged(SelectionChangedEventArgs<IObjectViewModel<TChild>> e)
-        {
-
-        }
+        {}
 
         /// <summary>
         /// Gets the selected items.
@@ -166,7 +157,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
         {
             get { return ((uint)_selectionMode & RequiredSelectionMask) != 0; }
         }
-
 
         private void HandleSelected(IObjectViewModel obj)
         {
@@ -257,7 +247,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
         /// <returns>true if succeeded, otherwise false</returns>
         public bool Select(object item, bool notify = true)
         {
-
             if (item == null)
                 throw new ArgumentException("item");
 
@@ -278,7 +267,6 @@ namespace LogoFX.Client.Mvvm.ViewModel
             }
 
             return true;
-
         }
 
         #endregion
