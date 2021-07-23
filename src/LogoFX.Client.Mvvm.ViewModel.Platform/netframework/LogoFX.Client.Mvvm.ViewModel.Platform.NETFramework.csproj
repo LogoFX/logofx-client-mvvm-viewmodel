@@ -60,7 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="LogoFX.Client.Mvvm.Core">
-      <Version>2.2.1-rc1</Version>
+      <Version>2.2.1</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
