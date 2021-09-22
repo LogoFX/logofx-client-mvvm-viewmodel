@@ -22,3 +22,6 @@ view model layer objects, implementing basic concerns.
 <img src=https://img.shields.io/nuget/dt/LogoFX.Client.Mvvm.ViewModel>
 
 [Get package](https://www.nuget.org/packages/LogoFX.Client.Mvvm.ViewModel)
+
+
+This repository is archived. Its functionality has been moved to https://github.com/LogoFX/mvvm
